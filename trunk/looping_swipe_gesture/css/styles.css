@@ -6,9 +6,10 @@
         
         #wrapper
         {            
-            overflow:hidden;            
+            /*overflow:hidden;*/
             position:relative; 
-            background:#000;                     
+            background:#000;
+            margin:50px auto;
         }
         
         #wrapper ul
@@ -16,8 +17,9 @@
             list-style:none;
             margin:0;
             padding:0; 
-            -webkit-transition: -webkit-transform 0.3s linear;   
-            display:none;                                 
+            -webkit-transition: -webkit-transform 0s linear;
+            display:none;
+            opacity:0.3;
         }
         
         #wrapper ul li
