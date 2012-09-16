@@ -90,22 +90,29 @@
         },
         //funciton called when touch end event is fired i.e finger is released from screen
         endHandler: function(event) {
-            if(swipey.distanceX > 0)
+            if((swipey.distanceX > 0 && swipey.currentDistance == 0) || (swipey.distanceX < 0 && swipey.currentDistance == -(swipey.maxDistance - swipey.preferredWidth)))
             {
-                swipey.moveRight();
+
             }
-            else if(swipey.distanceX < 0)
+            else
             {
-                swipey.moveLeft();
+                if(swipey.distanceX > 0)
+                {
+                    swipey.moveRight();
+                }
+                else if(swipey.distanceX < 0)
+                {
+                    swipey.moveLeft();
+                }
+                else{}
             }
-            else{}
             swipey.hasSwipeStarted = false; //reset the boolean var
             swipey.distanceX = 0; //reset the distance moved for next iteration
         },
         handleTransitionEnd:function(){
             if(swipey.currentDistance == -(swipey.maxDistance - swipey.preferredWidth))
             {
-                console.log("END OF LIST");
+                //console.log("END OF LIST");
                 swipey.slideContainer.appendChild(swipey.slides[0]);
                 swipey.slideContainer.style.webkitTransitionDuration = "0";
                 swipey.slideContainer.style.webkitTransform = "translateX(-" + (swipey.maxDistance - 2*swipey.preferredWidth) + "px)";
@@ -113,7 +120,7 @@
             }
             if(swipey.currentDistance == 0)
             {
-                console.log("BEGINNNING OF LIST");
+                //console.log("BEGINNNING OF LIST");
                 swipey.slideContainer.insertBefore(swipey.slides[swipey.slides.length - 1],swipey.slides[0]);
                 swipey.slideContainer.style.webkitTransitionDuration = "0";
                 swipey.slideContainer.style.webkitTransform = "translateX(-" + swipey.preferredWidth + "px)";
@@ -121,11 +128,13 @@
             }
         },
         moveLeft: function() {
+            //console.log('left');
             swipey.currentDistance += -swipey.preferredWidth;
             swipey.slideContainer.style.webkitTransitionDuration = 250 + "ms";
             swipey.slideContainer.style.webkitTransform = "translateX(" + swipey.currentDistance + "px)";
         },
         moveRight: function() {
+            //console.log('right');
             swipey.currentDistance += swipey.preferredWidth;
             swipey.slideContainer.style.webkitTransitionDuration = 250 + "ms";
             swipey.slideContainer.style.webkitTransform = "translateX(" + swipey.currentDistance + "px)";
