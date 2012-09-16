@@ -57,7 +57,6 @@
             swipey.slideContainer.style.webkitTransitionDuration = "0";
             swipey.slideContainer.style.webkitTransform = "translateX(-" + swipey.preferredWidth + "px)";
             swipey.currentDistance = -swipey.preferredWidth;
-            //swipey.repositionSlideContainer();
             //initialize and assign the touch events
             swipey.initEvents();
         },
