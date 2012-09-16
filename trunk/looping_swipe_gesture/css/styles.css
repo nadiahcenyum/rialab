@@ -6,8 +6,8 @@
         
         #wrapper
         {            
-            /*overflow:hidden;*/
-            position:relative; 
+            overflow:hidden;
+            position:relative;
             background:#000;
             margin:50px auto;
         }
@@ -19,7 +19,6 @@
             padding:0; 
             -webkit-transition: -webkit-transform 0s linear;
             display:none;
-            opacity:0.3;
         }
         
         #wrapper ul li
