@@ -1,0 +1,28 @@
+        body
+        {                        
+            margin:0;
+            padding:0;
+        }
+        
+        #wrapper
+        {            
+            overflow:hidden;
+            background-color:#000;                      
+        }
+        
+        #wrapper ul
+        {
+            list-style:none;
+            margin:0;
+            padding:0; 
+            -webkit-transition: -webkit-transform 0.3s linear;
+            display:none;
+        }
+        
+        #wrapper ul li
+        {
+           float:left;                        
+        }
+           
+              
+       
