@@ -19,7 +19,10 @@
 
         initSwipey: function() {
             //scroll the window up to hide the address bar of the browser.
-            window.setTimeout(function() { window.scrollTo(0, 1); }, 100);
+            if(swipey.isTouchSupported)
+            {
+                window.setTimeout(function() { window.scrollTo(0, 1); }, 100);
+            }
 
             /*mapping touch events to mouse events. Automatic registration of event
             based on the device. If touch enabled then touch event is registered.
@@ -157,13 +160,13 @@
         moveLeft: function() {
             //console.log('left');
             swipey.currentDistance += -swipey.preferredWidth;
-            swipey.slideContainer.style.webkitTransitionDuration = 250 + "ms";
+            swipey.slideContainer.style.webkitTransitionDuration = 150 + "ms";
             swipey.slideContainer.style.webkitTransform = "translateX(" + swipey.currentDistance + "px)";
         },
         moveRight: function() {
             //console.log('right');
             swipey.currentDistance += swipey.preferredWidth;
-            swipey.slideContainer.style.webkitTransitionDuration = 250 + "ms";
+            swipey.slideContainer.style.webkitTransitionDuration = 150 + "ms";
             swipey.slideContainer.style.webkitTransform = "translateX(" + swipey.currentDistance + "px)";
         }
     }; //end of swipey object
