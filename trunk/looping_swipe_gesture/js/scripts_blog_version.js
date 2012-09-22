@@ -66,6 +66,11 @@
             swipey.wrapper.addEventListener(swipey.moveEvent, swipey.moveHandler, false);
             swipey.wrapper.addEventListener(swipey.endEvent, swipey.endHandler, false);
 
+            if(!swipey.isTouchSupported) //for computer browsers
+            {
+                swipey.wrapper.addEventListener('mouseout', swipey.mouseOutHandler, false);
+            }
+
             swipey.slideContainer.addEventListener("webkitTransitionEnd",swipey.handleTransitionEnd,false);
         },
         //funciton called when touch start event is fired i.e finger is pressed on the screen
@@ -89,32 +94,47 @@
         },
         //funciton called when touch end event is fired i.e finger is released from screen
         endHandler: function(event) {
-            if(swipey.distanceX == 0) //if the intention is to tap on the image then open a link
+            if(swipey.hasSwipeStarted)
             {
-                var link_url = event.target.getAttribute("link"); //read the link from <img /> element
-                window.open(link_url,"_blank");
-            }
-            else
-            {
-                if((swipey.distanceX > 0 && swipey.currentDistance == 0) || (swipey.distanceX < 0 && swipey.currentDistance == -(swipey.maxDistance - swipey.preferredWidth)))
+                if(swipey.distanceX == 0) //if the intention is to tap on the image then open a link
                 {
-
+                    var link_url = event.target.getAttribute("link"); //read the link from <img /> element
+                    window.open(link_url,"_blank");
                 }
                 else
                 {
-                    if(swipey.distanceX > 0)
+                    if((swipey.distanceX > 0 && swipey.currentDistance == 0) || (swipey.distanceX < 0 && swipey.currentDistance == -(swipey.maxDistance - swipey.preferredWidth)))
                     {
-                        swipey.moveRight();
+
                     }
-                    else if(swipey.distanceX < 0)
+                    else
                     {
-                        swipey.moveLeft();
+                        if(swipey.distanceX > 0)
+                        {
+                            swipey.moveRight();
+                        }
+                        else if(swipey.distanceX < 0)
+                        {
+                            swipey.moveLeft();
+                        }
+                        else{}
                     }
-                    else{}
+                }
+                swipey.hasSwipeStarted = false; //reset the boolean var
+                swipey.distanceX = 0; //reset the distance moved for next iteration
+            }
+        },
+         mouseOutHandler:function(){  //fire a custom endEvent whenever mouse goes out of the swiping region
+            if(swipey.hasSwipeStarted)
+            {
+                //dispatch an end event
+                if(document.createEvent)
+                {
+                    var evt = document.createEvent('Event');
+                    evt.initEvent(swipey.endEvent, false, false);
+                    swipey.wrapper.dispatchEvent(evt);
                 }
             }
-            swipey.hasSwipeStarted = false; //reset the boolean var
-            swipey.distanceX = 0; //reset the distance moved for next iteration
         },
         handleTransitionEnd:function(){
             if(swipey.currentDistance == -(swipey.maxDistance - swipey.preferredWidth))
