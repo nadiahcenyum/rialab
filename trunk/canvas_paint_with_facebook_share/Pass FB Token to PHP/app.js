@@ -392,16 +392,6 @@ function hidePopUpMessage() {
 }
 
 function drawGradients() {
-    /*var grad = ctxColor.createLinearGradient(20, 0, canvasColorPicker.width - 20, 0);
-    grad.addColorStop(0, 'red');
-    grad.addColorStop(1 / 6, 'orange');
-    grad.addColorStop(2 / 6, 'yellow');
-    grad.addColorStop(3 / 6, 'green')
-    grad.addColorStop(4 / 6, 'aqua');
-    grad.addColorStop(5 / 6, 'blue');
-    grad.addColorStop(1, 'purple');
-    ctxColor.fillStyle=grad;
-    ctxColor.fillRect(0, 0, canvasColorPicker.width, canvasColorPicker.height);*/
     var imageObj = new Image();
     imageObj.onload = function(){
         ctxColor.drawImage(imageObj, 0, 0, canvasColorPicker.width, canvasColorPicker.height);//padding, padding);
