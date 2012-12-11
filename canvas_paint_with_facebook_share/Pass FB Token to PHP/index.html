@@ -1,0 +1,69 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>HTML5 Canvas Paint App - Mobile Web</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"> 
+    <link rel="stylesheet" href="app.css">
+</head>
+<body>
+    <div id="controls">
+        <input type="button" value="Clear" id="clearBtn"/>
+        <input type="button" value="Black" onclick="changeColor(this)">
+        <input type="button" value="Red" onclick="changeColor(this)">
+        <input type="button" value="Blue" onclick="changeColor(this)">
+        <input type="button" value="Eraser" onclick="erase()">
+        <!--<input type="button" value="Save" onclick="save()">-->
+        <!--<input type="button" value="Upload" onclick="upload()">-->
+        <input type="button" value="Share Photo" onclick="sharePhoto()">
+        <button onclick="facebookWallPost()">Share on Wall</button>
+        <!--<input type="button" value="Get Login Status" onclick="getLoginStatus()">-->
+        <input type="button" value="Facebook Logout" onclick="logout()">
+    </div>
+    <!-- Color previews -->
+    <div style="width:90px; height:30px; margin-bottom:10px;">
+        <div id="preview" style="width:40px; height:30px; float:left; border:1px solid #9a9a9a;"></div>
+        <div id="pick" style="width:40px; height:30px; float:right; border:1px solid #9a9a9a;"></div>
+    </div>
+    <div id="paintBoxContainer">
+        <canvas id="paintBox">
+            HTML5 Canvas Not Supported
+        </canvas>
+        <canvas id="colorPicker" width="200" height="150" style="border:1px solid #9a9a9a;">
+            HTML5 Canvas Not Supported
+        </canvas>
+    </div>
+    <br/>
+    <!-- Facebook Photo Share Dialog -->
+    <!--<div style="width:350px; height:280px; background:#efefef; padding:10px; margin:10px; display:none;" id="photoShareDialog">
+        <input type="text" style="height:25px; width:330px;" id="messageText" placeholder="Say something about your painting...">
+        <br/>
+        <img src="" id="canvasImg" width="300"/>
+        <br/>
+        <input type="button" value="Post Photo" onclick="upload()">
+    </div> -->
+    <!-- Facebook JS SDK inserted into DOM -->
+    <div id="fb-root"></div>
+    <script>
+        window.fbAsyncInit = function() {
+        FB.init({
+            appId      : '430939990293947',// App ID
+            //channelUrl : '//http://testing.goldspotmedia.com/pacifico/channel.html', // Channel File
+            //status     : true, // check login status, use either FB.getLoginStatus() or this
+            cookie     : true // enable cookies to allow the server to access the session
+            //xfbml      : true  // parse XFBML
+        });
+        };
+
+        // Load the SDK Asynchronously
+        (function(d){
+        var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0];
+        if (d.getElementById(id)) {return;}
+        js = d.createElement('script'); js.id = id; js.async = true;
+        js.src = "//connect.facebook.net/en_US/all.js";
+        ref.parentNode.insertBefore(js, ref);
+        }(document));
+    </script>
+    <script type="text/javascript" src="app.js"></script>
+    <script type="text/javascript" src="jquery-1.8.3.min.js"></script>
+</body>
+</html>
