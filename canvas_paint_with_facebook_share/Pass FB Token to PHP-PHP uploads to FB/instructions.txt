@@ -1,0 +1,18 @@
+canvaspaintapp - this is the CanvasPaint App registered in FB
+All the files use the App_ID for that App. The files are below, the photo is posted to FB from PHP file. Access token
+is sent from js to php using Jquery Ajax. Also photo share dialog is shown in this example. Message is also passed through Ajax.
+
+canvaspaintapp.html
+canvaspaint_app.js
+uploadandpost.php
+
+
+Pacifico - this is the Pacifico app (currently test app that was created in Facebook recently).It uses APP_Id for 
+Pacifico App. The photo is posted to FB from PHP file. Access token is sent from js to php using Jquery Ajax. PHP uploads foto to Facebook.
+
+The Files are,
+
+index.html
+app.js
+upload.php
+Currently I am doing all my experimentations here
