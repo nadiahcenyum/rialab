@@ -31,7 +31,9 @@ var ctxColor = null;
 var selColorR = 0;
 var selColorG = 0;
 var selColorB = 0;
-var pixelColor = 0;
+var pixelColor = 0, pixelColor1;
+var pixel = [19,15,5];  //default color for brush and bucket
+var curTool = "";
 
 function initApp() {
     //setTimeout(function() { window.scrollTo(0, 1); }, 10); //hide the address bar of the browser.
@@ -59,10 +61,10 @@ function initApp() {
         var canvasY = Math.floor(e.pageY - canvasOffset.top);
 
         var imageData = ctxColor.getImageData(canvasX, canvasY, 1, 1);
-        var pixel = imageData.data;
+        var pixel1 = imageData.data;
 
-        pixelColor = "rgba("+pixel[0]+", "+pixel[1]+", "+pixel[2]+", "+pixel[3]+")";
-        $('#preview').css('backgroundColor', pixelColor);
+        pixelColor1 = "rgba("+pixel1[0]+", "+pixel1[1]+", "+pixel1[2]+", "+pixel1[3]+")";
+        $('#preview').css('backgroundColor', pixelColor1);
     });
 
     $('#colorPicker').click(function(e) { // mouse click handler
@@ -71,8 +73,9 @@ function initApp() {
         var canvasY = Math.floor(e.pageY - canvasOffset.top);
 
         var imageData = ctxColor.getImageData(canvasX, canvasY, 1, 1);
-        var pixel = imageData.data;
+        pixel = imageData.data;
 
+        //console.log(pixel);
         //$('#rgbVal').val(pixel[0]+','+pixel[1]+','+pixel[2]);
 
         pixelColor = "rgba("+pixel[0]+", "+pixel[1]+", "+pixel[2]+", "+pixel[3]+")";
@@ -80,6 +83,72 @@ function initApp() {
 
         context.strokeStyle = pixelColor;
     });
+
+    var outlineImage = new Image();
+    var colorLayerData = null;
+    /*$('#paintBox').click(function(e) { // mouse click handler
+        if(shouldfillColor){
+            var canvasOffset = $(canvas).offset();
+            startX = Math.floor(e.pageX - canvasOffset.left);
+            startY = Math.floor(e.pageY - canvasOffset.top);
+
+            //console.log(startX);
+            paintBucketApp.paintAt(startX,startY,canvas.width,canvas.height,context,pixel);
+        }
+    }); */
+
+    //draw the background image
+    /*outlineImage.onload = function () {
+        context.drawImage(outlineImage, 0, 0, canvas.width, canvas.height);
+    };
+    outlineImage.src = "images/watermelon-duck-outline.png";*/
+}
+
+function useBrush(){
+    curTool = "brush";
+    if($("#brushSize").css("display") == "none")
+    {
+        $("#brushSize").css("display","block");
+    }
+}
+
+function fillColor(){
+    if(curTool !== "bucket"){
+        curTool = "bucket";
+        colorLayerData = context.getImageData(0, 0, canvas.width, canvas.height);
+        //console.log(colorLayerData);
+        if($("#brushSize").css("display") == "block")
+        {
+            $("#brushSize").css("display","none");
+        }
+    }
+}
+
+function setBrushSize(val){
+    //console.log(val);
+    context.strokeStyle = pixelColor;
+    switch(val){
+        case "Small":
+            context.lineWidth = 3;
+            break;
+        case "Med":
+            context.lineWidth = 7;
+            break;
+        case "Large":
+            context.lineWidth = 15;
+            break;
+    }
+}
+function erase()
+{
+    curTool = "eraser";
+    context.strokeStyle = "#ffffff";
+    if($("#brushSize").css("display") == "block")
+    {
+        $("#brushSize").css("display","none");
+    }
+    //context.globalCompositeOperation = "source-over";
+    context.lineWidth = 20;
 }
 
 function handleResize()
@@ -90,7 +159,7 @@ function handleResize()
 function setCanvasDmiension() {
     canvas.setAttribute('width', 400); //padding + borders //window.innerWidth - 22
     canvas.setAttribute('height', 300); //window.innerHeight - document.getElementById("controls").offsetHeight - 22
-    canvas.style.display = "block";
+    //canvas.style.display = "block";
 }
 
 function initializeEvents() {
@@ -110,37 +179,46 @@ function startPaint(evt) {
     if(!buttonDown)
     {
         var evtObj = isTouchSupported ? evt.touches[0] : evt;
-        //var mouseX = e.pageX - this.offsetLeft;
-        //var mouseY = e.pageY - this.offsetTop;
+        var startX = evtObj.pageX - this.offsetLeft;
+        var startY = evtObj.pageY - this.offsetTop;
 
-        //addClick(evtObj.pageX - this.offsetLeft, evtObj.pageY - this.offsetTop);
-        context.beginPath();
-        context.moveTo(evtObj.pageX - this.offsetLeft, evtObj.pageY - this.offsetTop);
-        buttonDown = true;
+        if(curTool === "bucket"){    //if paint bucket is currently selected
+            paintBucketApp.paintAt(startX,startY,canvas.width,canvas.height,context,colorLayerData,pixel);
+        }
+        else if(curTool === "brush" || curTool === "eraser"){    //start painting or erasing only when user clicks the corres. buttons
+            context.beginPath();
+            context.moveTo(startX, startY);
+            buttonDown = true;
+        }
+        else{}
         //console.log(this.offsetTop);
     }
     evt.preventDefault();
 }
 
 function continuePaint(evt) {
-    if(buttonDown)
-    {
-        var evtObj = isTouchSupported ? evt.touches[0] : evt;
-        //addClick(evtObj.pageX - this.offsetLeft, evtObj.pageY - this.offsetTop, true);
-        //redraw();
-        //canvas.width = canvas.width;
-        context.lineTo(evtObj.pageX - this.offsetLeft, evtObj.pageY - this.offsetTop);
-        //context.closePath();
-        context.stroke();
-        //console.log(evtObj.pageX);
+    if(curTool !== "bucket")  {
+        if(buttonDown)
+        {
+            var evtObj = isTouchSupported ? evt.touches[0] : evt;
+            //addClick(evtObj.pageX - this.offsetLeft, evtObj.pageY - this.offsetTop, true);
+            //redraw();
+            //canvas.width = canvas.width;
+            context.lineTo(evtObj.pageX - this.offsetLeft, evtObj.pageY - this.offsetTop);
+            //context.closePath();
+            context.stroke();
+            //console.log(evtObj.pageX);
+        }
     }
 }
 
 function stopPaint() {
-    buttonDown = false;
+    if(curTool !== "bucket"){
+        buttonDown = false;
+    }
 }
 
-function changeColor(obj)
+/*function changeColor(obj)
 {
     switch(obj.value)
     {
@@ -155,13 +233,7 @@ function changeColor(obj)
             break;
     }
     context.lineWidth = 2;
-}
-function erase()
-{
-    context.strokeStyle = "#ffffff";
-    //context.globalCompositeOperation = "source-over";
-    context.lineWidth = 20;
-}
+} */
 
 function upload(){
     sendAjaxReq();
@@ -392,6 +464,16 @@ function hidePopUpMessage() {
 }
 
 function drawGradients() {
+    /*var grad = ctxColor.createLinearGradient(20, 0, canvasColorPicker.width - 20, 0);
+    grad.addColorStop(0, 'red');
+    grad.addColorStop(1 / 6, 'orange');
+    grad.addColorStop(2 / 6, 'yellow');
+    grad.addColorStop(3 / 6, 'green')
+    grad.addColorStop(4 / 6, 'aqua');
+    grad.addColorStop(5 / 6, 'blue');
+    grad.addColorStop(1, 'purple');
+    ctxColor.fillStyle=grad;
+    ctxColor.fillRect(0, 0, canvasColorPicker.width, canvasColorPicker.height);*/
     var imageObj = new Image();
     imageObj.onload = function(){
         ctxColor.drawImage(imageObj, 0, 0, canvasColorPicker.width, canvasColorPicker.height);//padding, padding);

@@ -18,15 +18,29 @@ html,body
 {
     padding:10px;
 }
+#brushSize
+{
+    overflow:hidden;
+    display:none;
+}
+#brushSize ul li{
+    float:left;
+    padding:10px;
+}
 #paintBoxContainer
 {
     padding:10px;
+    clear:both;
+}
+#paintBoxContainer ul li{
+    float:left;
+    margin-right:20px;
 }
 #paintBox
 {
     border:1px solid #9a9a9a;
-    display:none;
-    /*width:100%;*/
+    /*display:none;
+    width:100%;*/
 }
 
 /* Button for pop up */
