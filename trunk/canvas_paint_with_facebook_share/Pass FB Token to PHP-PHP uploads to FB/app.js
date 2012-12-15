@@ -142,7 +142,9 @@ function setBrushSize(val){
 function erase()
 {
     curTool = "eraser";
-    context.strokeStyle = "#ffffff";
+    //eraser - the two lines are important
+    context.globalCompositeOperation = "copy";
+    context.strokeStyle = "rgba(0,0,0,0)";
     if($("#brushSize").css("display") == "block")
     {
         $("#brushSize").css("display","none");
