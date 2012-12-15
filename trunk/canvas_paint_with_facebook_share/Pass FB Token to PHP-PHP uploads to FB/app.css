@@ -26,6 +26,7 @@ html,body
 #brushSize ul li{
     float:left;
     padding:10px;
+    list-style:none;
 }
 #paintBoxContainer
 {
@@ -35,6 +36,7 @@ html,body
 #paintBoxContainer ul li{
     float:left;
     margin-right:20px;
+    list-style:none;
 }
 #paintBox
 {
