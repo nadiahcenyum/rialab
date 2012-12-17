@@ -7,7 +7,7 @@ canvaspaint_app.js
 uploadandpost.php
 
 
-Pacifico - this is the Pacifico app (currently test app that was created in Facebook recently).It uses APP_Id for 
+Pacifico - this is the Pacifico app (currently Test app that was created in Facebook recently).It uses APP_Id for 
 Pacifico App. The photo is posted to FB from PHP file. Access token is sent from js to php using Jquery Ajax. PHP uploads foto to Facebook.
 
 The Files are,
