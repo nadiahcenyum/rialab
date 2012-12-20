@@ -172,7 +172,7 @@ function save()
 		navigator.notification.alert(
 				 val,  // message
     			 alertDismissed,         // callback
-    			'Picture Saved'           // title    			
+    			'Picture Saved at'           // title    			
 			);	
 	});
 } 
