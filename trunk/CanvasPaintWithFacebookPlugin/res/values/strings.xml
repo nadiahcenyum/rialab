@@ -1,8 +1,0 @@
-<resources>
-
-    <string name="app_name">CanvasPaintWithFacebookPlugin</string>
-    <string name="hello_world">Hello world!</string>
-    <string name="menu_settings">Settings</string>
-    <string name="title_activity_canvas_paint_prod1">CanvasPaintProd1</string>
-
-</resources>
