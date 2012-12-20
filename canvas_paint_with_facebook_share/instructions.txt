@@ -1,5 +1,0 @@
-Pass FB Token to PHP - this folder has all the latest code. 
-This version uses javascript Ajax to send the FB access token, HTML5 Canvas Drawing data as base64 and photo message to PHP side. PHP then uploads the photo to FB.
-
-
-Upload photo link to PHP - this folder uses javascript to send only image data as base 64 to PHP. PHP stores the image as a file in the server. The image link is then sent as response to Ajax. After that Facebook JS SDK is used to upload photo to FB.
