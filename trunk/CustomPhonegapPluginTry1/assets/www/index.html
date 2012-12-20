@@ -1,0 +1,25 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>Cordova</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"> 
+<script type="text/javascript" charset="utf-8" src="cordova-2.2.0.js"></script>
+</head>
+<body>
+<h1>Custom Plugin Development</h1>
+<button onclick="test()">Echo Plugin</button>
+<button onclick="test1()">Canvas Plugin</button>
+<button onclick="test2()">Share Dialog Plugin</button>
+<button onclick="test3()">Save Photo Plugin</button>
+<canvas id="myCanvas" width="300" height="200">
+	Canvas Not Supported
+</canvas>
+<br/>
+<img src="" id="myImg" width="400"/>
+<script type="text/javascript" charset="utf-8" src="CanvasPlugin.js"></script>
+<script type="text/javascript" charset="utf-8" src="ShareDialogPlugin.js"></script>
+<script type="text/javascript" charset="utf-8" src="SavePhotoPlugin.js"></script>
+<script type="text/javascript" charset="utf-8" src="CustomPlugin.js"></script>
+<script type="text/javascript" charset="utf-8" src="app.js"></script>
+</body>
+</html>
