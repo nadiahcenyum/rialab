@@ -55,6 +55,7 @@
     <plugin name="CanvasPlugin" value="org.apache.cordova.plugin.CanvasPlugin"/>
     <plugin name="ShareDialogPlugin" value="org.apache.cordova.plugin.ShareDialogPlugin"/>
     <plugin name="SavePhotoPlugin" value="org.apache.cordova.plugin.SavePhotoPlugin"/>
+    <plugin name="StatusBarNotification" value="com.phonegap.plugins.statusBarNotification.StatusBarNotification"/>
 </plugins>
 </cordova>
 
