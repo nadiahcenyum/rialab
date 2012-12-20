@@ -56,6 +56,11 @@ function test2(){
 /* Save Photo to Device Gallery */
 function test3(){
 	window.savephotoplugin(canvas,"image/png",function(val){
-		alert("Photo Saved: " + val);		
+		//alert("Photo Saved: " + val);
+		window.plugins.statusBarNotification.notify("Photo Saved in Gallery", "Saved at: " + val);		
 	});
+}
+
+function test4(){
+	window.plugins.statusBarNotification.notify("Put your title here", "Put your message here");
 }
