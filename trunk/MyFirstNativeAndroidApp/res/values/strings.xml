@@ -1,7 +1,7 @@
 <resources>
 
     <string name="app_name">MyFirstNativeAndroidApp</string>
-    <string name="hello_world">Hello world!</string>
+    <string name="hello_world">Hello world Android app!</string>
     <string name="menu_settings">Settings</string>
     <string name="title_activity_my_first_native_android_app">MyFirstNativeAndroidApp</string>
 
