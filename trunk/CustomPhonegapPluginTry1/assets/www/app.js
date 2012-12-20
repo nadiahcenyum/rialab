@@ -56,6 +56,6 @@ function test2(){
 /* Save Photo to Device Gallery */
 function test3(){
 	window.savephotoplugin(canvas,"image/png",function(val){
-		alert("Photo Saved At: " + val);		
+		alert("Success: " + val);		
 	});
 }
