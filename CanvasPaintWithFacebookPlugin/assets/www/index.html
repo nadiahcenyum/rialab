@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>HTML5 Canvas Paint App - Mobile Web</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"> 
+    <link rel="stylesheet" href="app.css">
+</head>
+<body>
+    <div id="controls">
+        <input type="button" value="Clear" id="clearBtn"/>
+        <input type="button" value="Black" onclick="changeColor(this)">
+        <input type="button" value="Red" onclick="changeColor(this)">
+        <input type="button" value="Blue" onclick="changeColor(this)">
+        <input type="button" value="Eraser" onclick="erase()">
+        <input type="button" value="Save Drawing" onclick="save()">
+        <!--<input type="button" value="Upload" onclick="upload()">-->
+        <input type="button" value="Share Photo" onclick="sharePhoto()">
+        <button onclick="facebookWallPost()">Share on Wall</button>        
+        <!--<input type="button" value="Get Login Status" onclick="getLoginStatus()">-->
+        <input type="button" value="Facebook Logout" onclick="logout()">
+        <input type="button" value="Send Email" onclick="sendEmailTo()">
+        <input type="button" value="Check Network Connection" onclick="checkConnection()">
+    </div>
+    <div id="paintBoxContainer">
+        <canvas id="paintBox">
+            HTML5 Canvas Not Supported
+        </canvas>
+    </div>       
+    <!-- Facebook JS SDK inserted into DOM -->
+    <div id="fb-root"></div>
+    <!-- cordova -->
+	<script src="cordova-2.2.0.js"></script>
+    <!-- cordova facebook plugin -->
+	<script src="cdv-plugin-fb-connect.js"></script>
+    <!-- facebook js sdk -->
+	<script src="facebook_js_sdk.js"></script>
+	<!-- My Canvas Plugin -->
+	<script type="text/javascript" charset="utf-8" src="CanvasPlugin.js"></script>
+	<!-- Email plugin -->
+	<script src="EmailComposer.js"></script> 
+	<!-- Save Photo plugin -->
+	<script type="text/javascript" charset="utf-8" src="SavePhotoPlugin.js"></script>
+	<!--Jquery -->
+	<script type="text/javascript" src="jquery-1.8.3.min.js"></script>
+	<!-- My Script -->   
+    <script type="text/javascript" src="app.js"></script>
+</body>
+</html>
