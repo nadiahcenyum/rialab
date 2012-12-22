@@ -367,6 +367,12 @@ function getPermissions(userid, token){
         },
         error:function(error){
            console.log(error);
+           //sometimes when user logs out of FB in another tab, get permission req is a bad request.
+           if(error.status == 400)
+           {
+                alert('Bad Request');
+                window.location.reload();
+           }
         }
     });
 }
