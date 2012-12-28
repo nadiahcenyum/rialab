@@ -55,7 +55,8 @@
     <plugin name="org.apache.cordova.facebook.Connect" value="org.apache.cordova.facebook.ConnectPlugin" />
     <plugin name="EmailComposer" value="org.apache.cordova.EmailComposer" />
     <plugin name="CanvasPlugin" value="org.apache.cordova.plugin.CanvasPlugin"/>
-    <plugin name="SavePhotoPlugin" value="org.apache.cordova.plugin.SavePhotoPlugin"/>    
+    <plugin name="SavePhotoPlugin" value="org.apache.cordova.plugin.SavePhotoPlugin"/>  
+    <plugin name="StatusBarNotification" value="com.phonegap.plugins.statusBarNotification.StatusBarNotification"/>  
 </plugins>
 </cordova>
 
