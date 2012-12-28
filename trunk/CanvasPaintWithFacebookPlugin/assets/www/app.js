@@ -169,11 +169,12 @@ function save()
     // save canvas image in device gallery
     window.savephotoplugin(canvas,"image/png",function(val){
     	imagePathOnDevice = val;
-		navigator.notification.alert(
+		/*navigator.notification.alert(
 				 val,  // message
     			 alertDismissed,         // callback
     			'Picture Saved at'           // title    			
-			);	
+			);	*/
+		window.plugins.statusBarNotification.notify("Photo Saved in Gallery", "Saved at: " + val);	
 	});
 } 
 function alertDismissed() {
@@ -228,7 +229,8 @@ function sendAjaxReq()
            		//so we need to handle it here
                	var dataString = data.trim();
 	           	if(dataString.indexOf("photo") != -1){
-	                alert('Photo posted successfully!!');
+	                //alert('Photo posted successfully!!');
+	                window.plugins.statusBarNotification.notify("Photo Uploaded", "Successfully uploaded to Facebook");
 	                console.log(data.trim());
 	           	}else{
 	                alert('There was a problem uploading your photo. Please try again!!');
@@ -280,9 +282,9 @@ function facebookWallPost() {
 }
 
 function sharePhoto(){
-	getLoginStatus();	
+	//getLoginStatus();	
 	//login();	
-	//showPhotoDialog();
+	showPhotoDialog();
 }
 
 function login(){
