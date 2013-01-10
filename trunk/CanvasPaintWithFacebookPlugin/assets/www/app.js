@@ -282,9 +282,9 @@ function facebookWallPost() {
 }
 
 function sharePhoto(){
-	//getLoginStatus();	
+	getLoginStatus();	
 	//login();	
-	showPhotoDialog();
+	//showPhotoDialog();
 }
 
 function login(){
