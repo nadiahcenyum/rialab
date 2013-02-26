@@ -86,3 +86,8 @@ function test5(){
 		alert(val);   //once success message come and you have tested it, you can remove this alert.
 	});
 }
+
+function loadURL(url){
+    navigator.app.loadUrl(url, { openExternal:true });
+    return false;
+} 
