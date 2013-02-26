@@ -36,6 +36,7 @@ import android.app.Notification;
 import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
+import android.text.TextUtils;
 import android.util.Log;
 
 public class StatusBarNotification extends CordovaPlugin {
@@ -97,7 +98,8 @@ public class StatusBarNotification extends CordovaPlugin {
 
 		// We trust the flag value as it comes from our JS constant.
 		// This is also backwards compatible as it will be emtpy.
-		if (!flag.isEmpty()){
+		//if (!flag.isEmpty()){ //joseph - this was not working in Android 2.2. Support is there only from Android 2.3 - API Level9
+		if(!TextUtils.isEmpty(flag)){
 			flagVal = Integer.parseInt(flag);
 		}
 

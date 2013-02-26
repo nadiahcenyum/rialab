@@ -110,11 +110,11 @@ public class SavePhotoPlugin extends CordovaPlugin {
 	
 	private String savePhoto(Bitmap bmp)
 	{
-		//File imageFileFolder = new File(Environment.getExternalStorageDirectory(),"Rotate");
-		File path = Environment.getExternalStoragePublicDirectory(
+		File path = new File(Environment.getExternalStorageDirectory(),"Rotate");
+		/*File path = Environment.getExternalStoragePublicDirectory(
 		        Environment.DIRECTORY_PICTURES
-	    );
-		//imageFileFolder.mkdir();
+	    ); //this throws error in Android 2.2*/
+		path.mkdir();
 		FileOutputStream out = null;
 		Calendar c = Calendar.getInstance();
 		String date = fromInt(c.get(Calendar.MONTH))
