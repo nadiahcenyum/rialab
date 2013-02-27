@@ -1,4 +1,4 @@
-window.savephotoplugin = function(canvasEl,mimeType,callback){
+window.savephotoplugin = function(canvasEl,mimeType,appVersion,callback){
 	var canvasProps = {
 		mimeType: mimeType,
 		xpos: canvasEl.offsetLeft,
@@ -16,5 +16,5 @@ window.savephotoplugin = function(canvasEl,mimeType,callback){
 							canvasProps.ypos,
 							canvasProps.width,
 							canvasProps.height,
-							canvasProps.screenWidth]);	
+							canvasProps.screenWidth,appVersion]);	
 }

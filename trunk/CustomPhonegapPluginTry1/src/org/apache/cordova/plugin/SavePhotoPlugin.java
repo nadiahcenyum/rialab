@@ -33,6 +33,7 @@ public class SavePhotoPlugin extends CordovaPlugin {
 	private Bitmap bmp;
 	//private JSONObject imgData = new JSONObject();
 	//private DisplayMetrics metrics = new DisplayMetrics();
+	private String appVersion = ""; //getting the Android version from javascript now
 
 	@Override	
 	public boolean execute(String action, JSONArray data, CallbackContext callbackContext) throws JSONException {
@@ -42,7 +43,7 @@ public class SavePhotoPlugin extends CordovaPlugin {
 		int ypos = 0;
 		int width = 0;
 		int height = 0;
-		int screenWidth = 0;
+		int screenWidth = 0;		
 
 		if (action.equals("savePhoto")) {
 			try {
@@ -52,6 +53,7 @@ public class SavePhotoPlugin extends CordovaPlugin {
 				width = data.getInt(3);
 				height = data.getInt(4);
 				screenWidth = data.getInt(5);
+				appVersion = data.getString(6); //get the Android version								
 				
 				//first get the bitmap image created from the HTML5 Canvas passed
 			 	Bitmap b = this.getImageBitmapFromHTML5Canvas(mimeType, xpos, ypos, width, height, screenWidth);
@@ -81,7 +83,7 @@ public class SavePhotoPlugin extends CordovaPlugin {
     	/* Use Javascript to get the full width of the WebView - no WebView.getContentWidth() */
 
     	try {    		
-    		int webViewHeight = mAppView.getContentHeight();
+    		int webViewHeight = mAppView.getContentHeight();  
     		int webViewWidth = (screenWidth == 0) ? mAppView.getWidth() : screenWidth;
     		
     		//scale the webView dimensions by the screen density
@@ -110,34 +112,52 @@ public class SavePhotoPlugin extends CordovaPlugin {
 	
 	private String savePhoto(Bitmap bmp)
 	{
-		File path = new File(Environment.getExternalStorageDirectory(),"Rotate");
+		String retVal = "";
+		try
+		{
+		//File path = new File(Environment.getExternalStorageDirectory(),"Rotate");
 		/*File path = Environment.getExternalStoragePublicDirectory(
 		        Environment.DIRECTORY_PICTURES
 	    ); //this throws error in Android 2.2*/
-		path.mkdir();
-		FileOutputStream out = null;
-		Calendar c = Calendar.getInstance();
-		String date = fromInt(c.get(Calendar.MONTH))
-	            + fromInt(c.get(Calendar.DAY_OF_MONTH))
-	            + fromInt(c.get(Calendar.YEAR))
-	            + fromInt(c.get(Calendar.HOUR_OF_DAY))
-	            + fromInt(c.get(Calendar.MINUTE))
-	            + fromInt(c.get(Calendar.SECOND));
-		File imageFileName = new File(path, date.toString() + ".jpg"); //imageFileFolder
-		//System.out.println("###########################" + imageFileName);
-		try
-		{
+		//path.mkdir();			
+			File imageFileName = null;
+			FileOutputStream out = null;
+			Calendar c = Calendar.getInstance();
+			String date = fromInt(c.get(Calendar.MONTH))
+		            + fromInt(c.get(Calendar.DAY_OF_MONTH))
+		            + fromInt(c.get(Calendar.YEAR))
+		            + fromInt(c.get(Calendar.HOUR_OF_DAY))
+		            + fromInt(c.get(Calendar.MINUTE))
+		            + fromInt(c.get(Calendar.SECOND));
+		
+			//Double f = Double.valueOf(appVersion); //convert android version to double float type			
+			int check = appVersion.compareTo("2.3.3"); //if 1, then Android version is > 2.3.3, if 0 or -1 then Android version is 2.3.3 or lesser
+			System.out.println("###################$$$$$$$$$$ Check: " + check);
+			
+			if(check >= 1){ //for Android > 2.3 For eg. 2.3 or higher
+				System.out.println("$$$$$$$$$$ Greater");
+				File path = Environment.getExternalStoragePublicDirectory(
+						Environment.DIRECTORY_PICTURES
+				); //this throws error in Android 2.2
+				imageFileName = new File(path, date.toString() + ".jpg"); 
+			}else{ //for Android = 2.3.3 or lesser
+				System.out.println("$$$$$$$$$$ Lesser");				
+				imageFileName = new File(Environment.getExternalStorageDirectory(), date.toString() + ".jpg"); 	
+			}
+			
 			 out = new FileOutputStream(imageFileName);
 			 bmp.compress(Bitmap.CompressFormat.JPEG, 100, out);
 			 out.flush();
 			 out.close();
 			 scanPhoto(imageFileName.toString());
 			 out = null;
+			 retVal = imageFileName.toString();
 		} catch (Exception e)
 		{
 			e.printStackTrace();
+			retVal = "Something went wrong while saving the image!!";
 		}		
-		return imageFileName.toString();
+		return retVal;
 	}
 
 
