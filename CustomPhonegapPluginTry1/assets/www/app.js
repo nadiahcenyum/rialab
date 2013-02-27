@@ -3,7 +3,7 @@ document.addEventListener("deviceready",init,false);
 var canvas = null;
 var context = null;
 function init(){
-	//alert('device ready');	
+	alert('device ready: ' + device.version);	
 	canvas = document.getElementById("myCanvas");
 	context = canvas.getContext('2d');
 	context.beginPath();
@@ -71,7 +71,7 @@ function test2(){
 
 /* Save Photo to Device Gallery */
 function test3(){
-	window.savephotoplugin(canvas,"image/png",function(val){
+	window.savephotoplugin(canvas,"image/png",device.version,function(val){ //passing the android version now
 		//alert("Photo Saved: " + val);
 		window.plugins.statusBarNotification.notify("Photo Saved in Gallery", "Saved at: " + val);		
 	});
