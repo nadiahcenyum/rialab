@@ -167,7 +167,7 @@ var imagePathOnDevice;
 function save()
 {
     // save canvas image in device gallery
-    window.savephotoplugin(canvas,"image/png",function(val){
+    window.savephotoplugin(canvas,"image/png",device.version,function(val){
     	imagePathOnDevice = val;
 		/*navigator.notification.alert(
 				 val,  // message
