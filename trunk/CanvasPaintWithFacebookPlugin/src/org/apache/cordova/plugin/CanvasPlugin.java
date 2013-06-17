@@ -1,6 +1,6 @@
 /**
- * CanvasPlugin - Adds support on Android for toDataURL(type) on the HTML <canvas> tag
- * Usage: window.plugins.canvas.toDataURL(canvasElement, "image/png", success, failure);
+ * CanvasPlugin - Adds support on older Android's for toDataURL(type) on the HTML5 <canvas> tag
+ * Thanks to Ryan Gillespie http://ryangillespie.com and Jared Sheets.
  * Valid mime types: image/png, image/jpeg
  * Limitations: JPEG quality level hard-coded in this class
  */
@@ -19,13 +19,6 @@ import android.util.Base64;
 import java.io.ByteArrayOutputStream;
 //import org.apache.commons.codec.binary.Base64;
 
-
-/**
- * @author Ryan Gillespie
- * @website http://ryangillespie.com
- * @author Jared Sheets - Screen Density Fix
- *
- */
 public class CanvasPlugin extends CordovaPlugin {
 	
 	public static final String ACTION = "toDataURL";
@@ -39,7 +32,6 @@ public class CanvasPlugin extends CordovaPlugin {
 	//private DisplayMetrics metrics = new DisplayMetrics();
 
 	@Override
-	//public PluginResult execute(String action, JSONArray data, String callbackId) {
 	public boolean execute(String action, JSONArray data, CallbackContext callbackContext) throws JSONException {
 		mAppView = this.webView;
 
