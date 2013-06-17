@@ -3,7 +3,7 @@
  * with MIME Types jpeg or png. After successfull saving it calls the Media Scanner
  * to scan for the new photo and make it available in the gallery .
  * Returns - the path of the saved file to javascript
- * Uses code from my plugin - HTML5 Canvas toDataURL
+ * Uses code from my plugin - HTML5 Canvas toDataURL - http://jbkflex.wordpress.com/2012/12/21/html5-canvas-todataurl-support-for-android-devices-working-phonegap-2-2-0-plugin/
  * Thanks to Ryan Gillespie http://ryangillespie.com and Jared Sheets.
  */
 package org.apache.cordova.plugin;
