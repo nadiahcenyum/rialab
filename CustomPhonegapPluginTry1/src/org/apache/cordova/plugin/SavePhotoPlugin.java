@@ -133,15 +133,16 @@ public class SavePhotoPlugin extends CordovaPlugin {
 		            + fromInt(c.get(Calendar.SECOND));
 		
 			//Double f = Double.valueOf(appVersion); //convert android version to double float type			
-			int check = appVersion.compareTo("2.3.3"); //if 1, then Android version is > 2.3.3, if 0 or -1 then Android version is 2.3.3 or lesser
-			System.out.println("###################$$$$$$$$$$ Check: " + check);
+			int check = appVersion.compareTo("2.3.3"); //if 1 or greater, then Android version is > 2.3.3, if 0 or -1 then Android version is 2.3.3 or lesser
+			//System.out.println("###################$$$$$$$$$$ Check: " + check);
 			
-			if(check >= 1){ //for Android > 2.3 For eg. 2.3 or higher
-				//System.out.println("$$$$$$$$$$ Greater");
+			if(check >= 1){ //for Android > 2.3 For eg. 2.3 or higher				
+				//this throws error in Android 2.2, hence I have a corresponding else block
 				File path = Environment.getExternalStoragePublicDirectory(
 						Environment.DIRECTORY_PICTURES
-				); //this throws error in Android 2.2
+				); 
 				imageFileName = new File(path, date.toString() + ".jpg"); 
+				//System.out.println("$$$$$$$$$$ Greater: " + path);
 			}else{ //for Android = 2.3.3 or lesser
 				//System.out.println("$$$$$$$$$$ Lesser");				
 				imageFileName = new File(Environment.getExternalStorageDirectory(), date.toString() + ".jpg"); 	

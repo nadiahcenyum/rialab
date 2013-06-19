@@ -8,7 +8,7 @@ function init(){
 	context = canvas.getContext('2d');
 	context.beginPath();
 	context.rect(20, 50, 200, 100);
-	context.fillStyle = 'red';
+	context.fillStyle = 'yellow';
 	context.fill();	
 	
 	//document.addEventListener("backbutton", onBackKeyDown, false);
@@ -72,8 +72,8 @@ function test2(){
 /* Save Photo to Device Gallery */
 function test3(){
 	window.savephotoplugin(canvas,"image/png",device.version,function(val){ //passing the android version now
-		//alert("Photo Saved: " + val);
-		window.plugins.statusBarNotification.notify("Photo Saved in Gallery", "Saved at: " + val);		
+		alert("Photo Saved: " + val);
+		//window.plugins.statusBarNotification.notify("Photo Saved in Gallery", "Saved at: " + val);		
 	});
 }
 
