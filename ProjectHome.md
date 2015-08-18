@@ -1,0 +1,1 @@
+Joseph's RIA Lab is a blog focused on mobile web and rich internet application development. This is a common base for all the source codes.
